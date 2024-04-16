@@ -118,8 +118,10 @@ function installExternalJS(url) {
         .catch(error => console.error("Error installing external JS file:", error));
 }
 
-// 콘솔 출력 함수
 function displayConsole(prompt) {
+    const consoleElement = document.createElement('div'); // 콘솔 요소 생성
+    document.body.appendChild(consoleElement); // 문서에 추가
+
     const inputElement = document.createElement('input');
     inputElement.type = 'text';
     inputElement.placeholder = prompt;
@@ -127,13 +129,13 @@ function displayConsole(prompt) {
         if (event.key === 'Enter') {
             const command = inputElement.value.trim();
             processCommand(command);
-            inputElement.remove();
-            displayConsole("$ ");
+            inputElement.value = ''; // 입력창 비우기
         }
     });
     consoleElement.appendChild(inputElement);
     inputElement.focus();
 }
+
 
 // 명령어 처리 함수
 function processCommand(command) {
